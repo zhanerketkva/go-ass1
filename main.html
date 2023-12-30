@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тестирование сервера</title>
+</head>
+<body>
+
+    <h1>Тестирование сервера</h1>
+
+    <textarea id="messageInput" placeholder="Введите сообщение для сервера"></textarea>
+    <button onclick="sendRequest()">Отправить запрос</button>
+
+    <script>
+        function sendRequest() {
+            const message = document.getElementById('messageInput').value;
+
+            fetch('http://localhost:8080', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    message: message,
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Ответ от сервера:', data);
+            })
+            .catch(error => {
+                console.error('Ошибка:', error);
+            });
+        }
+    </script>
+
+</body>
+</html>
